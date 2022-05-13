@@ -17,7 +17,6 @@ function App() {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`,
         );
-        console.log('I am first fetch');
         if (!response.ok) {
           throw new Error('Weather data not available');
         }
@@ -51,7 +50,6 @@ function App() {
         if (!response.ok) {
           throw new Error('Weather data not available');
         }
-        console.log('City fetch');
         const cityData = await response.json();
         setUserCityWeatherData(cityData);
       } catch (err) {
