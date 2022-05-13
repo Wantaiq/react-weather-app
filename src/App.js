@@ -13,6 +13,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData(longitude, latitude) {
+      console.log('hi');
       try {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`,
@@ -23,6 +24,7 @@ function App() {
         const data = await response.json();
         setUserLocationWeatherData(data);
       } catch (err) {
+        setLocationErrorMessage('Weather data not available');
         console.log('hi');
       }
     }
@@ -35,7 +37,6 @@ function App() {
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
           setLocationErrorMessage('Location access permission denied');
-          console.log('Location access permission denied');
         }
       },
     );
@@ -53,7 +54,6 @@ function App() {
         const cityData = await response.json();
         setUserCityWeatherData(cityData);
       } catch (err) {
-        console.log(err);
         setCityDataErrorMessage('Weather data not available');
       }
     }
