@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import ChosenCityWeatherBox from './components/ChosenCityWeatherBox';
+import CityInputField from './components/CityInputField';
+import UserLocationWeatherBox from './components/UserLocationWeatherBox';
 
 function App() {
   const [cityInput, setCityInput] = useState('');
@@ -12,6 +15,7 @@ function App() {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`,
         );
+        console.log('I am first fetch');
         if (!response.ok) {
           throw new Error('Weather data not available');
         }
@@ -44,6 +48,7 @@ function App() {
         if (!response.ok) {
           throw new Error('Weather data not available');
         }
+        console.log('hi');
         const cityData = await response.json();
         setUserCityWeatherData(cityData);
       } catch (err) {
@@ -55,10 +60,28 @@ function App() {
     }
   }, [chosenCity]);
 
+  function handleCityInput(e) {
+    setCityInput(e.currentTarget.value);
+  }
+
+  function handleCitySubmit() {
+    setChosenCity(cityInput);
+  }
+
   return (
     <>
-      <input onChange={(e) => setCityInput(e.currentTarget.value)} />
-      <button onClick={() => setChosenCity(cityInput)} />
+      {userLocationWeatherData && (
+        <UserLocationWeatherBox
+          userLocationWeatherData={userLocationWeatherData}
+        />
+      )}
+      <CityInputField
+        handleCityInput={handleCityInput}
+        handleCitySubmit={handleCitySubmit}
+      />
+      {userCityWeatherData && (
+        <ChosenCityWeatherBox userCityWeatherData={userCityWeatherData} />
+      )}
     </>
   );
 }
