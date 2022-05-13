@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     async function fetchData(longitude, latitude) {
-      console.log('hi');
       try {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`,
@@ -25,7 +24,6 @@ function App() {
         setUserLocationWeatherData(data);
       } catch (err) {
         setLocationErrorMessage('Weather data not available');
-        console.log('hi');
       }
     }
     navigator.geolocation.getCurrentPosition(
