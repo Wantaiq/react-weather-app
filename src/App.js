@@ -8,6 +8,8 @@ function App() {
   const [chosenCity, setChosenCity] = useState('');
   const [userLocationWeatherData, setUserLocationWeatherData] = useState('');
   const [userCityWeatherData, setUserCityWeatherData] = useState('');
+  const [locationErrorMessage, setLocationErrorMessage] = useState('');
+  const [cityDataErrorMessage, setCityDataErrorMessage] = useState('');
 
   useEffect(() => {
     async function fetchData(longitude, latitude) {
@@ -22,7 +24,7 @@ function App() {
         const data = await response.json();
         setUserLocationWeatherData(data);
       } catch (err) {
-        console.log(err);
+        console.log('hi');
       }
     }
     navigator.geolocation.getCurrentPosition(
@@ -33,6 +35,7 @@ function App() {
       },
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
+          setLocationErrorMessage('Location access permission denied');
           console.log('Location access permission denied');
         }
       },
@@ -48,11 +51,12 @@ function App() {
         if (!response.ok) {
           throw new Error('Weather data not available');
         }
-        console.log('hi');
+        console.log('City fetch');
         const cityData = await response.json();
         setUserCityWeatherData(cityData);
       } catch (err) {
         console.log(err);
+        setCityDataErrorMessage('Weather data not available');
       }
     }
     if (chosenCity) {
@@ -66,23 +70,56 @@ function App() {
 
   function handleCitySubmit() {
     setChosenCity(cityInput);
+    setCityInput('');
   }
 
   return (
-    <>
-      {userLocationWeatherData && (
-        <UserLocationWeatherBox
-          userLocationWeatherData={userLocationWeatherData}
-        />
-      )}
+    <div className="container">
+      <div className="flex">
+        <div className="location">
+          {locationErrorMessage && (
+            <p className="location-err-message">{locationErrorMessage}</p>
+          )}
+          {userLocationWeatherData && (
+            <UserLocationWeatherBox
+              userLocationWeatherData={userLocationWeatherData}
+            />
+          )}
+        </div>
+        <div className="city">
+          {cityDataErrorMessage && (
+            <p className="city-data-err-message">{cityDataErrorMessage}</p>
+          )}
+          {userCityWeatherData && (
+            <ChosenCityWeatherBox
+              userCityWeatherData={userCityWeatherData}
+              errorMessage={cityDataErrorMessage}
+            />
+          )}
+        </div>
+      </div>
       <CityInputField
         handleCityInput={handleCityInput}
         handleCitySubmit={handleCitySubmit}
+        cityInput={cityInput}
       />
-      {userCityWeatherData && (
-        <ChosenCityWeatherBox userCityWeatherData={userCityWeatherData} />
-      )}
-    </>
+      {/* {userLocationWeatherData && (
+        <UserLocationWeatherBox
+        userLocationWeatherData={userLocationWeatherData}
+        />
+        )}
+        <CityInputField
+        handleCityInput={handleCityInput}
+        handleCitySubmit={handleCitySubmit}
+        cityInput={cityInput}
+        />
+        {userCityWeatherData && (
+          <ChosenCityWeatherBox
+          userCityWeatherData={userCityWeatherData}
+          errorMessage={cityDataErrorMessage}
+          />
+        )} */}
+    </div>
   );
 }
 

@@ -1,0 +1,166 @@
+/* ----- Reset ----- */
+
+/* Box sizing rules */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure {
+  margin: 0;
+}
+
+/* Set core body defaults */
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with a list role,
+which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Make images easier to work with */
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for
+people that prefer not to see them */
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::after,
+  *::before {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----- Reset done ------ */
+
+body {
+  background-color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 90vw;
+  background: url(../public/images/forest-background.jpg);
+  background-repeat: no-repeat;
+  background-size: center;
+  min-height: 90vh;
+  border-radius: 25px;
+  padding: 2em 1em;
+}
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.location-err-message,
+.city-data-err-message {
+  margin-top: 4em;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+.location-err-message,
+.city-data-err-message,
+.city,
+.temperature,
+.feels-like,
+.city-input {
+  text-shadow: 2px 2px #1c1c1c, 3px 3px #1c1c1c, 4px 4px #1c1c1c;
+  color: #dff0d8;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.weather-info {
+  margin-top: 3em;
+  font-size: 1.6rem;
+  letter-spacing: 1.3px;
+}
+
+.city-input {
+  background-color: transparent;
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 5px 3px 5px 3px #1c1c1c;
+  width: 150px;
+  transform: scaleY(100%);
+  transition: transform ease-in-out 2s;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10em;
+}
+
+.city-input:focus {
+  transform: scaleY(120%);
+  border: 0;
+  outline-color: #dff0d8;
+}
+
+.search-btn {
+  margin-top: 2em;
+  background-color: #1c1c1c;
+  border-radius: 25px;
+  padding: 0.5em 1.3em;
+  color: #dff0d8;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  width: 150px;
+  transition: background-color, transform, border ease-in-out;
+}
+
+.search-btn:hover {
+  background-color: #dff0d8;
+  color: #1c1c1c;
+  transform: scaleY(120%);
+  border-bottom: 4px solid #1c1c1c;
+  outline: none;
+}
+
+.search-btn:active {
+  border-bottom: none;
+  transform: translateY(3px);
+}
