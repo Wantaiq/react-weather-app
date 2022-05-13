@@ -103,22 +103,6 @@ function App() {
         handleCitySubmit={handleCitySubmit}
         cityInput={cityInput}
       />
-      {/* {userLocationWeatherData && (
-        <UserLocationWeatherBox
-        userLocationWeatherData={userLocationWeatherData}
-        />
-        )}
-        <CityInputField
-        handleCityInput={handleCityInput}
-        handleCitySubmit={handleCitySubmit}
-        cityInput={cityInput}
-        />
-        {userCityWeatherData && (
-          <ChosenCityWeatherBox
-          userCityWeatherData={userCityWeatherData}
-          errorMessage={cityDataErrorMessage}
-          />
-        )} */}
     </div>
   );
 }
